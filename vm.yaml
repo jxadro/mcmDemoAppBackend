@@ -1,0 +1,23 @@
+apiVersion: core.hybridapp.io/v1alpha1
+kind: Deployable
+metadata:
+  name: oracle-virtualmachine
+spec:
+  hybridtemplates:
+    - deployerType: ibminfra
+      template:
+        apiVersion: infra.management.ibm.com/v1alpha1
+        kind: VirtualMachine
+        metadata:
+          finalizers:
+            - virtualmachine.infra.management.ibm.com
+          name: oracle-vm
+          namespace: default
+        spec:
+          cfConnection:
+            name: 'conn1'
+          vmid: '1'
+  placement:
+    deployers:
+      - name: ibminfra
+        namespace: management-infrastructure-management
